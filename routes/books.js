@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { Book } = require('../models'); // Import the Book model
-const { Op } = require('sequelize');
+const { Op } = require('sequelize');  // For search functionality
 
 // Async Handler Function
 const asyncHandler = (cb) => {
@@ -14,7 +14,7 @@ const asyncHandler = (cb) => {
   };
 };
 
-// Home Route
+// Home Route Redirect to /books
 router.get('/', asyncHandler(async (req, res) => {
   res.redirect('/books');
 }));

@@ -18,11 +18,8 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false, // Ensures the value cannot be null
         validate: {
-          notNull: {
-            msg: "Please provide a value for title.",
-          },
           notEmpty: {
-            msg: "The Title can not be empty.", // Error message if empty
+            msg: "The Title cannot be empty.", // Error message if empty
           },
         },
       },
@@ -30,11 +27,8 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false, // Ensures the value cannot be null
         validate: {
-          notNull: {
-            msg: "Please provide a value for Author.",
-          },
           notEmpty: {
-            msg: "The Author can not be empty.", // Error message if empty
+            msg: "The Author cannot be empty.", // Error message if empty
           },
         },
       },
@@ -45,11 +39,6 @@ module.exports = (sequelize, DataTypes) => {
       year: {
         type: DataTypes.INTEGER,
         allowNull: true, // Allows null values
-        validate: {
-          isInt: {
-            msg: "Year must be an integer.", // Validates that the value is an integer
-          },
-        },
       },
     },
     {

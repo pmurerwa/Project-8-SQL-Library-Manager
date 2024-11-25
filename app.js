@@ -4,6 +4,7 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
+//Created Routers 
 var indexRouter = require("./routes/index");
 var booksRouter = require("./routes/books");
 
@@ -26,8 +27,9 @@ app.use(express.static(path.join(__dirname, "public"))); //Serve Static Files
 // Routes
 app.use("/", indexRouter);
 app.use("/books", booksRouter);
+app.use('/', booksRouter);
 
-// IIFE to sync/connect and authenticate the database
+// IIFE to sync and authenticate the database
 (async () => {
   // Sync models with the database
   try {
@@ -55,17 +57,10 @@ app.use(function (req, res, next) {
 
 // Global error handler
 app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message || "An unexpected error occurred.";
-  res.locals.error = req.app.get("env") === "development" ? err : {};
-  // Log the error details
-  console.error(`Error Status: ${err.status || 500}`);
-  console.error(`Error Message: ${err.message}`);
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render(err.status === 404 ? "page-not-found" : "error", { error: err });
-  //res.render('error');
+  err.status = err.status || 500; // Default to 500 if status isn't defined
+  err.message = err.message || 'Something went wrong!'; // Default error message
+  console.error(`Error ${err.status}: ${err.message}`); // Log the error details
+  res.status(err.status).render('error', { err }); // Render the error template with the error
 });
 
 module.exports = app;
