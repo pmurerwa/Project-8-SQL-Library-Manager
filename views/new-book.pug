@@ -1,0 +1,27 @@
+//This view will render a form to add a new book. If there are validation errors, they will be displayed above the form.
+
+extends layout
+
+block content
+  h1 Add a New Book
+
+  if errors
+    ul
+      each error in errors
+        li #{error.message}
+
+  form(action="/books/new" method="POST")
+    div
+      label(for="title") Title:
+      input(type="text" name="title" id="title" required)
+    div
+      label(for="author") Author:
+      input(type="text" name="author" id="author" required)
+    div
+      label(for="genre") Genre:
+      input(type="text" name="genre" id="genre")
+    div
+      label(for="year") Year:
+      input(type="number" name="year" id="year")
+    div
+      button(type="submit") Add Book
