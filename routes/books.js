@@ -14,13 +14,8 @@ const asyncHandler = (cb) => {
   };
 };
 
-// Home Route Redirect to /books
-router.get('/', asyncHandler(async (req, res) => {
-  res.redirect('/books');
-}));
-
 // Books Route - List all books with pagination and optional search
-router.get('/books', asyncHandler(async (req, res) => {
+router.get('/', asyncHandler(async (req, res) => {
   const { query } = req.query; // Search query
   const page = parseInt(req.query.page) || 1; // Current page
   const limit = 10; // Items per page
@@ -48,9 +43,9 @@ router.get('/books', asyncHandler(async (req, res) => {
 }));
 
 // New Book Route
-router.get('/books/new', asyncHandler(async (req, res) => {
+router.get('/new', (req, res) => {
   res.render('new-book', { book: {}, title: 'New Book' });
-}));
+});
 
 // Create Book Route
 router.post('/books/new', asyncHandler(async (req, res) => {

@@ -27,8 +27,8 @@ app.use(express.static(path.join(__dirname, "public"))); //Serve Static Files
 // Routes
 app.use("/", indexRouter);
 app.use("/books", booksRouter);
-app.use('/', booksRouter);
 
+// 
 // IIFE to sync and authenticate the database
 (async () => {
   // Sync models with the database
@@ -52,7 +52,6 @@ app.use(function (req, res, next) {
   const err = new Error("Oops, page not found");
   err.status = 404;
   next(err);
-  //next(createError(404));
 });
 
 // Global error handler
