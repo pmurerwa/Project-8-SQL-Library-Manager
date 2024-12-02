@@ -1,25 +1,29 @@
+
 extends layout
-
 block content
-  h1 Add a New Book
 
-  if errors
-    ul
-      each error in errors
-        li #{error.message}
+    h1 New Book
 
-  form(action="/books/new" method="POST")
-    div
-      label(for="title") Title:
-      input(type="text" name="title" id="title" required)
-    div
-      label(for="author") Author:
-      input(type="text" name="author" id="author" required)
-    div
-      label(for="genre") Genre:
-      input(type="text" name="genre" id="genre")
-    div
-      label(for="year") Year:
-      input(type="number" name="year" id="year")
-    div
-      button(type="submit") Add Book
+    if(errors)
+        h2.error Oops.
+        ul.error
+            each error in errors
+                li=error.message
+
+    form(action="/books/new", method="post")
+        p
+            label(for="title") Title
+            input#title(name="title" type="text" value=book.title)
+        p
+            label(for="author") Author
+            input#author(name="author" type="text" value=book.author)
+        p
+            label(for="genre") Genre
+            input#genre(name="genre" type="text" value=book.genre)
+        p
+            label(for="year") Year
+            input#year(name="year" type="text" value=book.year)
+        p
+            input(type="submit" value="Create New Book")
+        p
+            a.button(href="/books") Cancel

@@ -1,34 +1,37 @@
 extends layout
 
 block content
-  h1 Library Manager
-  form(action='/books' method='get')
-    input(type='text' name='search' placeholder='Search books...' value=search)
-    button(type='submit') Search
+  h1 Books
+  
+  //- form(action='/books' method='get')
+  //-   input(type='text' name='search' placeholder='Search for books' value=search)
+  //-   button(type='submit') Search
 
-  table
-    tr
-      th Title
-      th Author
-      th Genre
-      th Year
-      th Actions
-    each book in books
-      tr
-        td= book.title
-        td= book.author
-        td= book.genre
-        td= book.year
-        td
-          a(href=`/books/${book.id}`) Edit
-          form(action=`/books/${book.id}/delete` method='post' style='display:inline')
-            button(type='submit') Delete
-       
-  //- For Exceeds Expectations, Pagination
-  if totalPages > 1
-    nav
-      ul.pagination
-        each page in [...Array(totalPages).keys()]
-          li
-            a(href=`/books?page=${page + 1}&search=${search || ''}` class=(currentPage === page + 1 ? 'active' : ''))
-              = page + 1
+  p 
+    a.button(href="/books/new") Create New Book
+  
+
+    table
+      thead 
+        tr
+          th Title
+          th Author
+          th Genre
+          th Year
+      tbody 
+        each book in books
+          tr
+            td
+              a(href=`/books/${book.id}`) #{book.title}
+            td= book.author
+            td= book.genre
+            td= book.year
+            
+    //- //- For Exceeds Expectations, Pagination
+    //- if totalPages > 1
+    //-   nav 
+    //-     ul.pagination
+    //-       each page in [...Array(totalPages).keys()]
+    //-         li
+    //-           a(href=`/books?page=${page + 1}&search=${search || ''}` class=(currentPage === page + 1 ? 'active' : ''))
+    //-             = page + 1
